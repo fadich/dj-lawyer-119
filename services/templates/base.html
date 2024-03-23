@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lawyer Services</title>
+        {% load static %}
+        <link href="{% static 'main.css' %}" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1 align="center"><a href="{%  url 'homepage' %}">Dj Lawyer</a></h1>
+        <p class="my-warning">Today is a big of the bigs sale day!!!</p>
+        {% block content %}
+            Block content
+        {% endblock %}
+        <footer>
+            <div>
+                <a href="{% url 'about_us' %}">About us</a>
+            </div>
+        </footer>
+    </body>
+</html>

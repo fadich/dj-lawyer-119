@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Lawyer Services</title>
-        <style>
-            .my-warning {
-                color: red;
-            }
-        </style>
-    </head>
-    <body>
-        <h1 align="center" >Dj Lawyer</h1>
-        <p class="my-warning">Today is a big of the bigs sale day!!!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <h2>my name is {{ name }}</h2>
-        <p>Our team: {% for l in lawyers %}{{ l }}, {% endfor %}</p>
-    </body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+        <h2>Our team</h2>
+        {% for l in lawyers %}
+            <h3>{{ l.name }}</h3>
+            {% if l.experience %}
+                <p> Experience: {{ l.experience }} year(s)</p>
+            {% endif %}
+            <h4>Services</h4>
+            <ul>
+            {% for service in l.services.all %}
+                <li>{{ service.name }}</li>
+            {% endfor %}
+            </ul>
+        {% endfor %}
+{% endblock %}
