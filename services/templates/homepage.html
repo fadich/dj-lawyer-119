@@ -2,14 +2,14 @@
 {% block content %}
         <h2>Our team</h2>
         {% for l in lawyers %}
-            <h3>{{ l.name }}</h3>
+            <h3><a href="{% url 'lawyer_detailed' pk=l.pk %}">{{ l.name }}</a></h3>
             {% if l.experience %}
                 <p> Experience: {{ l.experience }} year(s)</p>
             {% endif %}
             <h4>Services</h4>
             <ul>
             {% for service in l.services.all %}
-                <li>{{ service.name }}</li>
+                <li>{{ service.name }} ({{ service.domain.name }})</li>
             {% endfor %}
             </ul>
         {% endfor %}
