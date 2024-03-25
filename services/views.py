@@ -1,7 +1,10 @@
 from datetime import datetime
 from typing import Iterable
 
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 # from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView
@@ -57,6 +60,27 @@ class LawyerDetailView(DetailView):
 
         # print(context['bookings'].query)
         return context
+
+
+class SignUpView(TemplateView):
+    template_name = 'signup.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['signup_form'] = UserCreationForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            login(request, user=form.instance)
+            return HttpResponseRedirect('/')
+        context = self.get_context_data()
+        context['signup_form'] = form
+        return self.render_to_response(context=context)
+
 
 
 
