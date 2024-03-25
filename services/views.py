@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 # from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import TemplateView, DetailView
 
 from .forms import BookingForm
@@ -76,7 +77,7 @@ class SignUpView(TemplateView):
         if form.is_valid():
             form.save()
             login(request, user=form.instance)
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect(reverse("homepage"))
         context = self.get_context_data()
         context['signup_form'] = form
         return self.render_to_response(context=context)
