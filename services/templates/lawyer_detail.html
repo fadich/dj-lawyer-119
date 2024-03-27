@@ -3,10 +3,24 @@
 {% block content %}
     <h2>{{ object.name }}</h2>
     <p>{{ object.description }}</p>
+
     <h4>Services</h4>
-            <ul>
-            {% for service in object.services.all %}
-                <li>{{ service.name }} ({{ service.domain.name }})</li>
-            {% endfor %}
-            </ul>
+    <ul>
+    {% for service in object.services.all %}
+        <li>{{ service.name }} ({{ service.domain.name }})</li>
+    {% endfor %}
+    </ul>
+
+    <h4>Bookings</h4>
+    <ul>
+    {% for booking in bookings %}
+        <li>
+            {{ booking.datetime_start }} - {{ booking.datetime_end }}
+            ({{ booking.service.name }})
+        </li>
+    {% endfor %}
+    </ul>
+    <form action="">
+        {{ booking_form.as_p }}
+    </form>
 {% endblock %}
