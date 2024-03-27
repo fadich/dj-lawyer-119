@@ -8,7 +8,15 @@
     </head>
     <body>
         <h1 align="center"><a href="{%  url 'homepage' %}">Dj Lawyer</a></h1>
-        <p align="right"><a href="{% url 'signup' %}"> SignUp </a></p>
+        <p align="right">
+            {% if user.is_authenticated %}
+                <a>{{ user.username }}</a>
+                <a href="{%  url 'signout' %}">Sing Out</a>
+            {% else %}
+                <a href="{% url 'signup' %}"> SignUp </a>
+                <a href="{% url 'signin' %}"> SignIn </a>
+            {% endif %}
+        </p>
         <p class="my-warning">Today is a big of the bigs sale day!!!</p>
         {% block content %}
             Block content
